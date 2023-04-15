@@ -6,7 +6,8 @@ module.exports = {
   api_keys: {
     bscscan: secret.API_KEY,
     etherscan: secret.ETHER_SCAN_API_KEY,
-    arbitrum: secret.ARBITRUM_KEY
+    arbiscan: secret.ARBITRUM_KEY,
+    polygonscan: secret.POLYGON_SCAN_KEY
   },
   networks: {
     development: {
@@ -53,11 +54,21 @@ module.exports = {
       gas: 5500000
     },
     arbitrum: {
-      // https://infura.io/dashboard/ethereum
-      // truffle deploy --network mainnet
+      // truffle deploy --network arbitrum
       provider: () => new HDWalletProvider(secret.MMENOMIC, `https://arb1.arbitrum.io/rpc`),
       network_id: 42161,      // Mainnet id
       gas: 5500000
+    },
+    polygon: {
+      // truffle deploy --network polygon
+      provider: () => new HDWalletProvider(secret.MMENOMIC, `https://rpc-mainnet.maticvigil.com`),
+      network_id: 137,      // Mainnet id
+      gas: 180e9,
+      gasPrice: 18000000,
+      gasLimit: 29795532000000000,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
     }
   },
   compilers: {
